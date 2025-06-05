@@ -1,0 +1,17 @@
+{% if user.is_authenticated %}
+  <form method="post" action="{% url 'onlinecourse:submit' course.id %}">
+    {% csrf_token %}
+    {% for question in course.question_set.all %}
+      <div>
+        <p>{{ question.question_text }}</p>
+        {% for choice in question.choice_set.all %}
+          <input type="checkbox" name="choice" value="{{ choice.id }}" id="choice{{ choice.id }}">
+          <label for="choice{{ choice.id }}">{{ choice.choice_text }}</label><br>
+        {% endfor %}
+      </div>
+    {% endfor %}
+    <button type="submit">Submit Exam</button>
+  </form>
+{% else %}
+  <p>Please login to take the exam.</p>
+{% endif %}

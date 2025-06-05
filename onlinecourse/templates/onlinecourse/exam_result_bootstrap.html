@@ -1,0 +1,15 @@
+<h2>Exam Result for {{ course.name }}</h2>
+<p>Your score: {{ total_score }} out of {{ max_score }}</p>
+
+{% if total_score == max_score %}
+  <p>Congratulations! You passed the exam.</p>
+{% else %}
+  <p>Unfortunately, you did not pass. Try again!</p>
+{% endif %}
+
+<h3>Your selected answers:</h3>
+<ul>
+  {% for choice in selected_choices %}
+    <li>{{ choice.choice_text }} - {% if choice.is_correct %}Correct{% else %}Incorrect{% endif %}</li>
+  {% endfor %}
+</ul>
